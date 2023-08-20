@@ -8,7 +8,8 @@ struct point{
 };
 
 
-int main() {
+int main() 
+{
     int rows, cols, mines;
     printf("Enter the number of rows: ");
     scanf("%d", &rows);
@@ -25,15 +26,20 @@ int main() {
     int grid[rows][cols];
 
     int max;
-    if (rows > cols){
+
+    if (rows > cols)
+    {
         max = rows;
     }
-    else{
+    else
+    {
         max = cols;
     }
 
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
+    for (int i = 0; i < rows; i++) 
+    {
+        for (int j = 0; j < cols; j++) 
+        {
             grid[i][j] = 0;
         }
     }
