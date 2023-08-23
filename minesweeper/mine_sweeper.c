@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "grid.h"
+#include "generate_grid.h"
 
 
 int main(void) 

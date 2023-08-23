@@ -1,6 +1,6 @@
-#ifndef GRID_H
-#define GRID_H
+#ifndef GENERATE_GRID_H
+#define GENERATE_GRID_H
 
 int generate_grid();
 
-#endif // GRID_H
+#endif
