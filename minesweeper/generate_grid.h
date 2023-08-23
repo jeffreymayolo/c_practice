@@ -1,6 +1,7 @@
-#ifndef GRID_H
-#define GRID_H
+#ifndef GENERATE_GRID_H
+#define GENERATE_GRID_H
 
-int generate_grid();
+int **generate_grid(int rows, int cols, int mines);
+void free_grid(int **grid, int rows);
 
 #endif // GRID_H
