@@ -6,12 +6,26 @@
 
 int main(void) 
 {
-    int grid = generate_grid();
-    if (1 == grid)
-    {
-        printf("Error generating grid\n");
+    int rows, cols, mines;
+    printf("Enter the number of rows: ");
+    scanf("%d", &rows);
+    printf("Enter the number of columns: ");
+    scanf("%d", &cols);
+    printf("Enter the number of mines: ");
+    scanf("%d", &mines);
+    if (mines > rows*cols){
+        printf("Error: Too many mines\n");
         return 1;
     }
 
+    // initialize grid
+    int **grid = generate_grid(rows, cols, mines);
+
+    // print grid
+    print_grid(grid, rows, cols);
+
+    // Free grid
+    free_grid(grid, rows);
     return 0;
 }
+

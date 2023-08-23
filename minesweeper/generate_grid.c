@@ -2,34 +2,21 @@
 #include <stdlib.h>
 #include <time.h>
 
-int generate_grid() 
+int **generate_grid(int rows, int cols, int mines) 
 {
-    int rows, cols, mines;
-    printf("Enter the number of rows: ");
-    scanf("%d", &rows);
-    printf("Enter the number of columns: ");
-    scanf("%d", &cols);
-    printf("Enter the number of mines: ");
-    scanf("%d", &mines);
-    if (mines > rows*cols){
-        printf("Error: Too many mines\n");
-        return 1;
-    }
+    // Allocate memory for the grid
+    int **grid = (int **)malloc(rows * sizeof(int *));
 
-    // Declare and initialize a 2D array
-    int grid[rows][cols];
-
-    int max;
-
-    if (rows > cols)
+    // For each pointer in the array, allocate memory for an array of ints
+    for (int i = 0; i < rows; i++)
     {
-        max = rows;
-    }
-    else
-    {
-        max = cols;
+        grid[i] = (int *)malloc(cols * sizeof(int));
     }
 
+    // Max grid coord of bomb is max of rows and columns 
+    int max = (rows > cols) ? rows : cols;
+
+    // Initialize the grid to have all zeros
     for (int i = 0; i < rows; i++) 
     {
         for (int j = 0; j < cols; j++) 
@@ -37,31 +24,48 @@ int generate_grid()
             grid[i][j] = 0;
         }
     }
-    
-    int x, y = max +2;
-    int rand1, rand2 = max + 1;
 
-    unsigned int seedValue = (unsigned int)time(NULL); // Get the current time as a seed
+    // Initialize random values to invalid values
+    int x_coor_bomb;
+    int y_coor_bomb;
+
+    // Get current time and set it as the seed for random
+    unsigned int seedValue = (unsigned int)time(NULL);
     srand(seedValue);
 
-    for (int i = 0; i <= mines; i++){
-        while (x == rand1 && y == rand2){
-            rand1 = rand() % max;
-            rand2 = rand() % max;
-        }
-        x = rand1;
-        y = rand2;
-        grid[x][y] = 1;
+    // Loop through ang generate bombs for the number of mines
+    for (int i = 1; i <= mines; i++)
+    {
+        do 
+        {
+            x_coor_bomb = rand() % max;
+            y_coor_bomb = rand() % max;
+        } while (grid[x_coor_bomb][y_coor_bomb]==1);
+
+        grid[x_coor_bomb][y_coor_bomb] = 1;
+
     }
 
-    // Access and print the values in the 2D array
-    printf("Grid:\n");
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            printf("%d ", grid[i][j]);
+    return grid;
+}
+
+void free_grid(int **grid, int rows)
+{
+    for (int i = 0; i < rows; i++)
+    {
+        free(grid[i]);
+    }
+    free(grid);
+}
+
+void print_grid(int **grid, int rows, int cols)
+{
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j<cols; j++)
+        {
+            printf("%i", grid[i][j]);
         }
         printf("\n");
     }
-
-    return 0;
 }
