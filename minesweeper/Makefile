@@ -1,4 +1,4 @@
-CC = gcc
+codCC = gcc
 CFLAGS = -Wall -I.
 TARGET = mine_sweeper
 SRCS = generate_grid.c
