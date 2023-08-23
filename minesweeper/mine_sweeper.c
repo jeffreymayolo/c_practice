@@ -21,17 +21,11 @@ int main(void)
     // initialize grid
     int **grid = generate_grid(rows, cols, mines);
 
-    // Print contents of grid
-    for (int i = 0; i < rows; i++)
-    {
-        for (int j = 0; j < cols; j++)
-        {
-            printf("%i", grid[i][j]);
-        }
-        printf("\n");
-    }
+    // print grid
+    print_grid(grid, rows, cols);
 
     // Free grid
     free_grid(grid, rows);
     return 0;
 }
+

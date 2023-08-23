@@ -3,5 +3,6 @@
 
 int **generate_grid(int rows, int cols, int mines);
 void free_grid(int **grid, int rows);
+void print_grid(int **grid, int rows, int cols);
 
-#endif // GRID_H
+#endif 

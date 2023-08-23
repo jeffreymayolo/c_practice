@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-int **generate_grid(rows, cols, mines) 
+int **generate_grid(int rows, int cols, int mines) 
 {
     // Allocate memory for the grid
     int **grid = (int **)malloc(rows * sizeof(int *));
@@ -24,37 +24,48 @@ int **generate_grid(rows, cols, mines)
             grid[i][j] = 0;
         }
     }
-    
-    // initialize x_bomb, y_bomb to invalid values to be changes later
-    int x_bomb, y_bomb = max +2;
 
     // Initialize random values to invalid values
-    int rand1, rand2 = max + 1;
+    int x_coor_bomb;
+    int y_coor_bomb;
 
     // Get current time and set it as the seed for random
     unsigned int seedValue = (unsigned int)time(NULL);
     srand(seedValue);
 
     // Loop through ang generate bombs for the number of mines
-    for (int i = 0; i <= mines; i++)
+    for (int i = 1; i <= mines; i++)
     {
-        while (x_bomb == rand1 && y_bomb == rand2)
+        do 
         {
-            rand1 = rand() % max;
-            rand2 = rand() % max;
-        }
-        x_bomb = rand1;
-        y_bomb = rand2;
-        grid[x_bomb][y_bomb] = 1;
+            x_coor_bomb = rand() % max;
+            y_coor_bomb = rand() % max;
+        } while (grid[x_coor_bomb][y_coor_bomb]==1);
+
+        grid[x_coor_bomb][y_coor_bomb] = 1;
+
     }
+
     return grid;
 }
 
-void free_grid(double **grid, int rows)
+void free_grid(int **grid, int rows)
 {
     for (int i = 0; i < rows; i++)
     {
         free(grid[i]);
     }
     free(grid);
+}
+
+void print_grid(int **grid, int rows, int cols)
+{
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j<cols; j++)
+        {
+            printf("%i", grid[i][j]);
+        }
+        printf("\n");
+    }
 }
