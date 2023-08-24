@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
-int **generate_grid(int rows, int cols, int mines) 
+int **generate_grid(int rows, int cols, int mines, char *type) 
 {
     // Allocate memory for the grid
     int **grid = (int **)malloc(rows * sizeof(int *));
@@ -13,9 +14,6 @@ int **generate_grid(int rows, int cols, int mines)
         grid[i] = (int *)malloc(cols * sizeof(int));
     }
 
-    // Max grid coord of bomb is max of rows and columns 
-    int max = (rows > cols) ? rows : cols;
-
     // Initialize the grid to have all zeros
     for (int i = 0; i < rows; i++) 
     {
@@ -24,6 +22,16 @@ int **generate_grid(int rows, int cols, int mines)
             grid[i][j] = 0;
         }
     }
+
+    // Stop function and return grid if it is a display grid
+    if (strcmp(type, "display")==0)
+    {
+        return grid;
+    }
+
+
+    // Max grid coord of bomb is max of rows and columns 
+    int max = (rows > cols) ? rows : cols;
 
     // Initialize random values to invalid values
     int x_coor_bomb;

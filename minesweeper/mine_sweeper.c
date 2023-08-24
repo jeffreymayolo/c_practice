@@ -18,14 +18,23 @@ int main(void)
         return 1;
     }
 
-    // initialize grid
-    int **grid = generate_grid(rows, cols, mines);
+    // initialize master grid
+    char *type_1 = "master";
+    int **master_grid = generate_grid(rows, cols, mines, type_1);
+
+    // initialize display grid
+    char *type_2 = "display";
+    int **display_grid = generate_grid(rows, cols, mines, type_2);
+    
 
     // print grid
-    print_grid(grid, rows, cols);
+    print_grid(master_grid, rows, cols);
+    printf("\n");
+    print_grid(display_grid, rows, cols);
 
     // Free grid
-    free_grid(grid, rows);
+    free_grid(master_grid, rows);
+    free_grid(display_grid, rows);
     return 0;
 }
 

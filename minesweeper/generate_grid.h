@@ -1,7 +1,7 @@
 #ifndef GENERATE_GRID_H
 #define GENERATE_GRID_H
 
-int **generate_grid(int rows, int cols, int mines);
+int **generate_grid(int rows, int cols, int mines, char *type);
 void free_grid(int **grid, int rows);
 void print_grid(int **grid, int rows, int cols);
 
